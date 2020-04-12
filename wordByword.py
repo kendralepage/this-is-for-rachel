@@ -8,22 +8,23 @@ import os
 from time import sleep
 from subprocess import Popen, PIPE
 def send_Message():
-    getFile=input(str("Enter file name: "))
-    infile=open(getFile, 'r')
-    number=input(str("Enter phone number"))
-    for line in infile:
-        words=line.split()
-        for var in words: 
-           scpt = '''on run {targetBuddyPhone, targetMessage}
+    getFile=input(str("Enter file name: ")) #get file
+    infile=open(getFile, 'r') #open file
+    number=input(str("Enter phone number")) #get number
+    for line in infile: #go through lines
+        words=line.split() #split lines
+        for var in words: #go through words in lines
+           #start applescript
+           scpt = '''on run {targetBuddyPhone, targetMessage} 
             tell application "Messages"
             set targetService to 1st service whose service type = iMessage
             set targetBuddy to buddy targetBuddyPhone of targetService
             send targetMessage to targetBuddy
             end tell
-            end run'''
-           args = [number, words]
+            end run''' #end applescript
+           args = [number, words] #command line arguments to be supplied
            p = Popen(['osascript', '-'] + args, stdin=PIPE, stdout=PIPE, stderr=PIPE, universal_newlines=True)
-           stdout, stderr = p.communicate(scpt)
-           sleep(0.1)
+           stdout, stderr = p.communicate(scpt) #run it
+           sleep(0.1) #delay
 
-send_Message()
+send_Message() #full send
