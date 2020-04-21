@@ -22,7 +22,7 @@ def send_Message():
             send targetMessage to targetBuddy
             end tell
             end run''' #end applescript
-           args = [number, words] #command line arguments to be supplied
+           args = [number, var] #command line arguments to be supplied
            p = Popen(['osascript', '-'] + args, stdin=PIPE, stdout=PIPE, stderr=PIPE, universal_newlines=True)
            stdout, stderr = p.communicate(scpt) #run it
            sleep(0.1) #delay
